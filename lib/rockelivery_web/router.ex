@@ -33,8 +33,6 @@ defmodule RockeliveryWeb.Router do
   if Mix.env() == :dev do
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
-
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
 end
