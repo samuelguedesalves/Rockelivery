@@ -9,7 +9,7 @@ defmodule RockeliveryWeb.UsersController do
   def create(conn, params) do
     with {:ok, %User{} = user} <- Rockelivery.create_user(params) do
       conn
-      |> put_status(:ok)
+      |> put_status(:created)
       |> render("create.json", user: user)
     end
   end
@@ -21,6 +21,12 @@ defmodule RockeliveryWeb.UsersController do
       |> render("show.json", user: user)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    with {:ok, %User{}} <- Rockelivery.delete_user(id) do
+      conn
+      |> put_status(:no_content)
+      |> text("")
     end
   end
 end
